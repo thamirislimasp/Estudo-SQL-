@@ -173,12 +173,16 @@ encomendas x colaboradores
 encomendas_produtos x encomendas x produtos */
 
 --  Queremos dados sobre as encomendas de uma cliente cujo id = 20
-SELECT c. *, e. * FROM clientes c LEFT Join encomendas  e  ON c.id = e.id_cliente WHERE c.i = 20;
+SELECT c. *, e. * FROM clientes c LEFT Join encomendas  e  ON c.id = e.id_cliente WHERE c.id = 20;
  
 -- 20 primeiros clientes que fizeram encomendas na loja:
 SELECT e.id, e.data_hora, c.nome, c.email FROM encomendas e LEFT JOIN clientes c ON e.id_cliente = c.id LIMIT 20;
 
+SELECT count(*) total FROM encomendas_produtos;
 
+-- Detalhes da encomenda 3, quando foi efetuada a compra, que produtos foram comprados e as quantidades:
+SELECT e.data_hora, p.produto, ep.quantidade FROM encomendas_produtos ep LEFT JOIN  encomendas e ON e.id = ep.id_encomenda LEFT JOIN produtos p ON p.id = ep.id_produto WHERE e.id = 3;
 
-
-
+SELECT e.data_hora, p.produto, ep.quantidade, CONCAT(round(p.preco_unidade * ep.quantidade,2), 'R$') as total FROM encomendas_produtos ep LEFT JOIN  encomendas e ON e.id = ep.id_encomenda LEFT JOIN produtos p ON p.id = ep.id_produto WHERE e.id = 3;
+-- CONCAT == concatenação 
+-- round == vai arredondar os valores para duas casas decimais
