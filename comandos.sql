@@ -224,3 +224,14 @@ SELECT e.id, -- atributo da tabela encomendas
   ep.quantidade, -- atributo da tabela encomenda_produto
   round(ep.quantidade * p.preco_unidade) AS total
   FROM encomendas_produtos ep LEFT JOIN encomendas e ON ep.id_encomenda = e.id LEFT JOIN produtos p ON ep.id_produto = p.id WHERE e.id = 50;
+
+SELECT e.id, -- atributo da tabela encomendas
+  e.data_hora, -- atributo da tabela encomendas
+  p.produto, -- atributo da tabela produto
+  p.preco_unidade, -- atributo da tabela produto
+  ep.quantidade, -- atributo da tabela encomenda_produto
+  round(SUM(ep.quantidade * p.preco_unidade,2)) AS `total encomendas`
+  FROM encomendas_produtos ep LEFT JOIN encomendas e ON ep.id_encomenda = e.id LEFT JOIN produtos p ON ep.id_produto = p.id WHERE e.id = 50;
+
+
+  SELECT id_encomenda, id_cliente, SUM(total) total FROM (SELECT ep.id_encomenda, e.id_cliente, ep.quantidade, p.produto, CAST(ep.quantidade * p.preco_unidade AS decimal(10,2)) AS total FROM encomendas_produtos ep LEFT JOIN produtos p ON ep.id_produto = p.id LEFT JOIN encomendas e ON e.id = ep.id_encomenda WHERE e.id = 50) a GROUP BY id_encomenda;
