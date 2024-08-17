@@ -186,3 +186,41 @@ SELECT e.data_hora, p.produto, ep.quantidade FROM encomendas_produtos ep LEFT JO
 SELECT e.data_hora, p.produto, ep.quantidade, CONCAT(round(p.preco_unidade * ep.quantidade,2), 'R$') as total FROM encomendas_produtos ep LEFT JOIN  encomendas e ON e.id = ep.id_encomenda LEFT JOIN produtos p ON p.id = ep.id_produto WHERE e.id = 3;
 -- CONCAT == concatenação 
 -- round == vai arredondar os valores para duas casas decimais
+
+------------- 16/08
+-- Outras formas de agregação
+
+-- MIN - Permitir ver o valor mínimo em um conjunto de resultados
+-- MAX - Permitir ver o valor máximo em um conjunto de resultados
+
+-- quero saber qual é o rpimeiro cliente de Lisboa na tabela cliente.
+SELECT id, nome FROM clientes WHERE cidade = "Lisboa" LIMIT 1;
+SELECT MIN(id), nome FROM clientes WHERE cidade = "Lisboa";
+
+SELECT MAX(id), nome FROM clientes WHERE email LIKE "%gmail.com";
+
+-- AGV - Permite calcular a média de um conjunto de resultados NUMÉRICOS.
+-- SUM - Permite ver o somatório (calculo total) de um conjunto de resultados.  
+
+-- Média de preços dos produtos
+SELECT round (AVG(preco_unidade),2) preco_medio FROM produtos; 
+
+-- Soma 
+SELECT round (SUM(preco_unidade),2) total_preco FROM produtos; 
+
+-- Vamos calcular uma determinada encomenda, buscando primeiramente seus dados. (id = 50)
+SELECT e.id, -- atributo da tabela encomendas
+  e.data_hora, -- atributo da tabela encomendas
+  p.produto, -- atributo da tabela produto
+  p.preco_unidade, -- atributo da tabela produto
+  ep.quantidade -- atributo da tabela encomenda_produto
+  FROM encomendas_produtos ep LEFT JOIN encomendas e ON ep.id_encomenda = e.id LEFT JOIN produtos p ON ep.id_produto = p.id WHERE e.id = 50;
+
+-- 3 produtos (preco_unidade * quantidade)
+SELECT e.id, -- atributo da tabela encomendas
+  e.data_hora, -- atributo da tabela encomendas
+  p.produto, -- atributo da tabela produto
+  p.preco_unidade, -- atributo da tabela produto
+  ep.quantidade, -- atributo da tabela encomenda_produto
+  round(ep.quantidade * p.preco_unidade) AS total
+  FROM encomendas_produtos ep LEFT JOIN encomendas e ON ep.id_encomenda = e.id LEFT JOIN produtos p ON ep.id_produto = p.id WHERE e.id = 50;
