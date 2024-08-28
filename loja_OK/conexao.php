@@ -5,6 +5,6 @@ $username = "root";
 $password = "";
 
 // Cria a conexão:
-$conexao = mysqli_connect($servername, $database, $username, $password);
+$conexao = mysqli_connect($servername, $username, $password, $database);
 
 ?>
