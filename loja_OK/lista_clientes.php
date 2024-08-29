@@ -35,6 +35,7 @@
         </thead>
         <tbody>
             <?php
+            include 'menu.php';
             include 'conexao.php'; 
 
             $sql = "SELECT * FROM clientes";
