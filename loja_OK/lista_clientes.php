@@ -14,6 +14,10 @@
     </style>
 </head>
 <body>
+    <?php
+    include 'menu.php';
+    include 'conexao.php';
+    ?>
     <h3>Lista de Clientes</h3>
     <table class="table table-hover container">
         <thead>
@@ -35,9 +39,7 @@
         </thead>
         <tbody>
             <?php
-            include 'menu.php';
-            include 'conexao.php'; 
-
+            
             $sql = "SELECT * FROM clientes";
             $busca_cliente = mysqli_query($conexao, $sql);
             while ($array = mysqli_fetch_array($busca_cliente)){
