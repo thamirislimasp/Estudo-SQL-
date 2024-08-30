@@ -25,7 +25,7 @@
      ?>
   <div class="container">
         <h4> Categoria Alterada com Sucesso!</h4>
-        <a href="lista_categorias.php" class="btn btn-primary">Voltar</a>
+        <a href="lista_categoria.php" class="btn btn-primary">Voltar</a>
         </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>     
